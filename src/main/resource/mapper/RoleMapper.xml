@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gonmao.dao.IRoleDao" >
+
+
+    <select id="findAllRole" resultType="com.gonmao.bean.Role">
+        select * from tb_role
+    </select>
+    <select id="addRole" parameterType="com.gonmao.bean.Role">
+        insert into tb_role(rname,rdesc,rmoney,rsex) values (#{rname},#{rdesc},#{rmoney},#{rsex})
+    </select>
+
+    <delete id="delRoleById" parameterType="com.gonmao.bean.Role">
+        delete  from tb_role where rid=#{rid}
+    </delete>
+
+    <select id="findRoleById" parameterType="Integer" resultType="com.gonmao.bean.Role">
+        select * from tb_role where rid=#{rid}
+    </select>
+    <select id="findRoleByUserId" parameterType="Integer" resultType="com.gonmao.bean.Role">
+
+        select * from tb_role where rid in(select rid from tb_user_role where uid = #{rid})
+
+    </select>
+    </mapper>
